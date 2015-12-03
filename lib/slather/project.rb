@@ -95,7 +95,7 @@ module Slather
     private :gcov_coverage_files
 
     def profdata_coverage_files
-      files = profdata_llvm_cov_output.split("\n\n")
+      files = profdata_llvm_cov_output.encode('utf-8', 'binary', :invalid => :replace, :undef => :replace).split("\n\n")
 
       files.map do |source|
         coverage_file = coverage_file_class.new(self, source)
